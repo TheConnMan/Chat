@@ -2,32 +2,24 @@ var app = require('express')();
 var express = require('express');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-
-var moment = require('moment');
+var rooms = require('./src/rooms');
 
 io.on('connection', function(socket) {
 	socket.on('username', function(username) {
 		socket.username = username;
-		io.sockets.emit('send:message', {
-			text: username + ' joined',
-			date: moment().format('HH:mm:ss'),
-			type: 'join'
-		});
 	});
 	socket.on('message', function(text) {
-		io.sockets.emit('send:message', {
-			text: text,
-			user: socket.username,
-			date: moment().format('HH:mm:ss')
-		});
+		rooms.send(io, socket, text, 'message');
+	});
+	socket.on('change', function(room) {
+		if (socket.room) {
+			rooms.leave(io, socket);
+		}
+		rooms.join(io, socket, room);
 	});
 	socket.on('disconnect', function() {
 		if (socket.username) {
-			io.sockets.emit('send:message', {
-				text: socket.username + ' left',
-				date: moment().format('HH:mm:ss'),
-				type: 'join'
-			});
+			rooms.leave(io, socket);
 		}
 	});
 });

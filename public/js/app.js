@@ -3,7 +3,7 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 	$routeProvider.when('/', {
 		templateUrl: '/partials/username.html'
 	})
-	.when('/chat', {
+	.when('/:room', {
 		templateUrl: '/partials/chat.html'
 	})
 	.otherwise({
@@ -13,7 +13,7 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 .factory('socket', function(socketFactory) {
 	return socketFactory();
 })
-.controller('Chat', ['$scope', '$http', '$location', 'socket', function($scope, $http, $location, socket) {
+.controller('Chat', ['$scope', '$http', '$location', '$routeParams', 'socket', function($scope, $http, $location, $routeParams, socket) {
 	$scope.messages = [];
 	$scope.user = {
 		username: ''
@@ -25,6 +25,8 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 	$scope.$on('$routeChangeSuccess', function() {
 		if ($location.path != '/' && $scope.user.username.length === 0) {
 			$location.path('/');
+		} else if ($routeParams.room) {
+			$scope.changeRoom($routeParams.room);
 		}
 	});
 
@@ -49,8 +51,14 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 		}
 	};
 
+	$scope.changeRoom = function(room) {
+		$scope.messages = [];
+		$scope.room = room;
+		socket.emit('change', room);
+	};
+
 	$scope.differentUser = function(index) {
-		return $scope.messages[index].user != $scope.messages[index - 1].user;
+		return $scope.messages[index].user != $scope.messages[index - 1].user || $scope.messages[index - 1].type == 'join';
 	};
 }]).directive('enter', function() {
 	return function($scope, $element, $attrs) {
