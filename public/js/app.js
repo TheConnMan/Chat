@@ -15,12 +15,14 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 })
 .controller('Chat', ['$scope', '$http', '$location', '$routeParams', 'socket', function($scope, $http, $location, $routeParams, socket) {
 	$scope.messages = [];
+	$scope.init = false;
 	$scope.user = {
 		username: ''
 	};
 	$scope.chat = {
 		message: ''
 	};
+	$scope.defaultRooms = ['general', 'random', 'meta'];
 
 	$scope.$on('$routeChangeSuccess', function() {
 		if ($location.path != '/' && $scope.user.username.length === 0) {
@@ -37,7 +39,7 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 	$scope.sendUsername = function() {
 		if ($scope.user.username.length !== 0) {
 			socket.emit('username', $scope.user.username);
-			$location.path('/chat');
+			$scope.init = true;
 		}
 	};
 
@@ -49,6 +51,10 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 				$('#message').focus();
 			}, 0);
 		}
+	};
+
+	$scope.redirectRoom = function(room) {
+		$location.path('/' + room);
 	};
 
 	$scope.changeRoom = function(room) {
