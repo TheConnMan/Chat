@@ -1,9 +1,12 @@
 angular.module('chat', ['ngRoute', 'btford.socket-io'])
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/', {
+		templateUrl: '/partials/landing.html'
+	})
+	.when('/username', {
 		templateUrl: '/partials/username.html'
 	})
-	.when('/:room', {
+	.when('/room/:room', {
 		templateUrl: '/partials/chat.html'
 	})
 	.otherwise({
@@ -15,7 +18,6 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 })
 .controller('Chat', ['$scope', '$http', '$location', '$routeParams', 'socket', function($scope, $http, $location, $routeParams, socket) {
 	$scope.messages = [];
-	$scope.init = false;
 	$scope.user = {
 		username: ''
 	};
@@ -25,8 +27,8 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 	$scope.defaultRooms = ['general', 'random', 'meta'];
 
 	$scope.$on('$routeChangeSuccess', function() {
-		if ($location.path != '/' && $scope.user.username.length === 0) {
-			$location.path('/');
+		if ($location.path != '/username' && $scope.user.username.length === 0) {
+			$location.path('/username');
 		} else if ($routeParams.room) {
 			$scope.changeRoom($routeParams.room);
 		}
@@ -39,7 +41,7 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 	$scope.sendUsername = function() {
 		if ($scope.user.username.length !== 0) {
 			socket.emit('username', $scope.user.username);
-			$scope.init = true;
+			$location.path('/');
 		}
 	};
 
@@ -54,7 +56,7 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 	};
 
 	$scope.redirectRoom = function(room) {
-		$location.path('/' + room);
+		$location.path('/room/' + room);
 	};
 
 	$scope.changeRoom = function(room) {

@@ -1,4 +1,4 @@
-<div class="ui compact segment" style="margin-left: auto; margin-right: auto;" ng-show="!init">
+<div class="ui compact segment" style="margin-left: auto; margin-right: auto;">
 	<div class="ui right action labeled input">
 		<div class="ui label">
 			Username
@@ -9,17 +9,6 @@
 			<i class="right arrow icon"></i>
 		</button>
 	</div>
-</div>
-<div class="ui content segment" ng-show="init">
-	<h1 class="ui dividing header">Rooms</h1>
-	<p>
-		You can join any room you want to join the conversation. Below are a few default rooms.
-	</p>
-	<ul class="ui list">
-		<li ng-repeat="room in defaultRooms">
-			<a ng-click="redirectRoom(room)">#{{ room }}</a>
-		</li>
-	</ul>
 </div>
 <script>
 	$(function() {
