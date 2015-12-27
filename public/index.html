@@ -4,6 +4,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.min.css"></link>
 		<title>TheConnMan - Chat</title>
+		<style>
+			.content.minimal {
+				font-style: italic;
+				opacity: 0.5;
+			}
+		</style>
 	</head>
 	<body ng-app="chat" ng-controller="Chat">
 		<div class="ui segment">
@@ -25,13 +31,8 @@
 			<h2 class="ui header">Messages</h2>
 			<div class="ui large feed">
 				<div class="event" ng-repeat="message in messages">
-					<div class="content" ng-if="message.type == 'join'">
-						<div class="summary">
-							{{ message.text }}
-							<div class="date">
-								{{ message.date }}
-							</div>
-						</div>
+					<div class="content minimal" ng-if="message.type == 'join'">
+						{{ message.text }}
 					</div>
 					<div class="content" ng-if="message.type != 'join'">
 						<div class="summary">
