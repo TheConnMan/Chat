@@ -1,6 +1,7 @@
-var app = angular.module('chat', []);
-
-app.controller('Chat', ['$scope', '$http', function($scope, $http) {
+angular.module('chat', ['btford.socket-io']).
+factory('socket', function(socketFactory) {
+	return socketFactory();
+}).controller('Chat', ['$scope', '$http', 'socket', function($scope, $http, socket) {
 	$scope.username = '';
 
 	$scope.sendUsername = function() {
