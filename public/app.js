@@ -15,6 +15,13 @@ factory('socket', function(socketFactory) {
 			$scope.init = true;
 		}
 	};
+
+	$scope.sendMessage = function() {
+		if ($scope.message.length !== 0) {
+			socket.emit('message', $scope.message);
+			$scope.message = '';
+		}
+	};
 }]).directive('enter', function() {
 	return function($scope, $element, $attrs) {
 		$element.bind('keydown keypress', function(e) {

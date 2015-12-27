@@ -18,6 +18,13 @@ io.on('connection', function(socket) {
 			type: 'join'
 		});
 	});
+	socket.on('message', function(text) {
+		io.sockets.emit('send:message', {
+			text: text,
+			user: socket.username,
+			date: moment().format('HH:mm:ss')
+		});
+	});
 	socket.on('disconnect', function() {
 		if (socket.username) {
 			io.sockets.emit('send:message', {
