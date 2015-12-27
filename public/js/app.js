@@ -19,7 +19,7 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 .controller('Chat', ['$scope', '$http', '$location', '$routeParams', 'socket', function($scope, $http, $location, $routeParams, socket) {
 	$scope.messages = [];
 	$scope.user = {
-		username: ''
+		username: window.localStorage.username || ''
 	};
 	$scope.chat = {
 		message: ''
@@ -38,8 +38,13 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 		$scope.messages.push(message);
 	});
 
+	if (window.localStorage.username) {
+		socket.emit('username', $scope.user.username);
+	}
+
 	$scope.sendUsername = function() {
 		if ($scope.user.username.length !== 0) {
+			window.localStorage.username = $scope.user.username;
 			socket.emit('username', $scope.user.username);
 			$location.path('/');
 		}
