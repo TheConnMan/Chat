@@ -7,3 +7,7 @@
 	margin-right: auto;
 	max-width: 800px;
 }
+
+.ui.list a {
+	cursor: pointer;
+}
