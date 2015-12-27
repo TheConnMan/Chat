@@ -66,6 +66,10 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 		$location.path('/room/' + room);
 	};
 
+	$scope.randomRoom = function() {
+		$location.path('/room/' + uuid.v4());
+	};
+
 	$scope.changeRoom = function(room) {
 		$scope.messages = [];
 		$scope.room = room;
