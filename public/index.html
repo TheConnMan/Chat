@@ -34,7 +34,7 @@
 					<div class="content minimal" ng-if="message.type == 'join'">
 						{{ message.text }}
 					</div>
-					<div class="content" ng-if="message.type != 'join'">
+					<div class="content" ng-if="message.type != 'join' && differentUser($index)">
 						<div class="summary">
 							{{ message.user }}
 							<div class="date">
@@ -44,6 +44,9 @@
 						<div class="extra text">
 							{{ message.text }}
 						</div>
+					</div>
+					<div class="content" ng-if="message.type != 'join' && !differentUser($index)">
+						{{ message.text }}
 					</div>
 				</div>
 			</div>

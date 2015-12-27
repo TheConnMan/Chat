@@ -26,6 +26,10 @@ factory('socket', function(socketFactory) {
 		}
 	};
 
+	$scope.differentUser = function(index) {
+		return $scope.messages[index].user != $scope.messages[index - 1].user;
+	};
+
 	$('#username').focus();
 }]).directive('enter', function() {
 	return function($scope, $element, $attrs) {
