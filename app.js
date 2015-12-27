@@ -29,5 +29,5 @@ app.use(express.static('public'));
 server.listen(3000, function() {
 	var host = server.address().address;
 	var port = server.address().port;
-	console.log('Chat listening at http://%s:%s', host, port);
+	console.log('Transient listening at http://%s:%s', host, port);
 });

@@ -1,5 +1,4 @@
 {
-  "name": "chat",
   "ignore": [
     "**/.*",
     "node_modules",

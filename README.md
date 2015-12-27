@@ -1,12 +1,12 @@
-# Chat
+# Transient
 Simple non-persistent chat app to test out websockets
 
 ## Install
-**Chat** requires Node.js, NPM, and Bower to be installed locally.
+**Transient** requires Node.js, NPM, and Bower to be installed locally.
 
 ```bash
-git clone git@github.com:TheConnMan/Chat.git
-cd Chat
+git clone git@github.com:TheConnMan/Transient.git
+cd Transient
 npm install
 bower install
 node app.js
@@ -15,9 +15,9 @@ node app.js
 Then navigate to [http://localhost:3000](http://localhost:3000).
 
 ## Docker
-**Chat** can also be run with Docker with the following commands:
+**Transient** can also be run with Docker with the following commands:
 
 ```bash
-docker build -t theconnman/chat .
-docker run -d -p 80:3000 --name chat theconnman/chat
+docker build -t theconnman/transient .
+docker run -d -p 80:3000 --name transient theconnman/transient
 ```
