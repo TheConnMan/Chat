@@ -22,6 +22,12 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 		message: ''
 	};
 
+	$scope.$on('$routeChangeSuccess', function() {
+		if ($location.path != '/' && $scope.user.username.length === 0) {
+			$location.path('/');
+		}
+	});
+
 	socket.on('send:message', function(message) {
 		$scope.messages.push(message);
 	});
