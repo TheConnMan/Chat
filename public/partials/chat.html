@@ -1,0 +1,38 @@
+<div class="ui segment content">
+	<h2 class="ui dividing header">Messages</h2>
+	<div class="ui large feed">
+		<div class="event" ng-repeat="message in messages">
+			<div class="content minimal" ng-if="message.type == 'join'">
+				{{ message.text }}
+			</div>
+			<div class="content" ng-if="message.type != 'join' && differentUser($index)">
+				<div class="summary">
+					{{ message.user }}
+					<div class="date">
+						{{ message.date }}
+					</div>
+				</div>
+				<div class="extra text">
+					{{ message.text }}
+				</div>
+			</div>
+			<div class="content" ng-if="message.type != 'join' && !differentUser($index)">
+				{{ message.text }}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="ui segment content">
+	<div class="ui right action fluid input">
+		<input id="message" type="text" ng-model="chat.message" placeholder="Message" enter="sendMessage()" />
+		<button class="ui primary right labeled icon button" ng-click="sendMessage()">
+			Send
+			<i class="right arrow icon"></i>
+		</button>
+	</div>
+</div>
+<script>
+	$(function() {
+		$('#message').focus();
+	});
+</script>
