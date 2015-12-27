@@ -14,7 +14,7 @@ io.on('connection', function(socket) {
 		socket.username = username;
 		io.sockets.emit('send:message', {
 			text: username + ' joined',
-			date: moment().format('HH:mm ss'),
+			date: moment().format('HH:mm:ss'),
 			type: 'join'
 		});
 	});
@@ -22,7 +22,7 @@ io.on('connection', function(socket) {
 		if (socket.username) {
 			io.sockets.emit('send:message', {
 				text: socket.username + ' left',
-				date: moment().format('HH:mm ss'),
+				date: moment().format('HH:mm:ss'),
 				type: 'join'
 			});
 		}
