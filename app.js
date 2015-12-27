@@ -5,10 +5,6 @@ var io = require('socket.io')(server);
 
 var moment = require('moment');
 
-io.on('connection', function() {
-	console.log('New connection');
-});
-
 io.on('connection', function(socket) {
 	socket.on('username', function(username) {
 		socket.username = username;
@@ -38,4 +34,8 @@ io.on('connection', function(socket) {
 
 app.use(express.static('public'));
 
-server.listen(3000);
+server.listen(3000, function() {
+	var host = server.address().address;
+	var port = server.address().port;
+	console.log('Chat listening at http://%s:%s', host, port);
+});
