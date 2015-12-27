@@ -13,6 +13,9 @@ factory('socket', function(socketFactory) {
 		if ($scope.username.length !== 0) {
 			socket.emit('username', $scope.username);
 			$scope.init = true;
+			setTimeout(function() {
+				$('#message').focus();
+			}, 0);
 		}
 	};
 
@@ -22,6 +25,8 @@ factory('socket', function(socketFactory) {
 			$scope.message = '';
 		}
 	};
+
+	$('#username').focus();
 }]).directive('enter', function() {
 	return function($scope, $element, $attrs) {
 		$element.bind('keydown keypress', function(e) {
