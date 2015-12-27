@@ -13,3 +13,11 @@ node app.js
 ```
 
 Then navigate to [http://localhost:3000](http://localhost:3000).
+
+## Docker
+**Chat** can also be run with Docker with the following commands:
+
+```bash
+docker build -t theconnman/chat .
+docker run -d -p 80:3000 --name chat theconnman/chat
+```
