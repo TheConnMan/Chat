@@ -11,9 +11,8 @@ factory('socket', function(socketFactory) {
 
 	$scope.sendUsername = function() {
 		if ($scope.username.length !== 0) {
-			$http.get('/api/username?username=' + $scope.username).then(function(data) {
-				$scope.init = true;
-			});
+			socket.emit('username', $scope.username);
+			$scope.init = true;
 		}
 	};
 }]).directive('enter', function() {

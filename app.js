@@ -9,17 +9,17 @@ io.on('connection', function() {
 	console.log('New connection');
 });
 
-app.use(express.static('public'));
-
-app.get('/api/username', function(req, res) {
-	io.sockets.emit('send:message', {
-		text: req.query.username + ' joined',
-		date: moment().format('HH:mm ss'),
-		type: 'join'
-	});
-	res.json({
-		ok: true
+io.on('connection', function(socket) {
+	socket.on('username', function(username) {
+		socket.username = username;
+		io.sockets.emit('send:message', {
+			text: username + ' joined',
+			date: moment().format('HH:mm ss'),
+			type: 'join'
+		});
 	});
 });
+
+app.use(express.static('public'));
 
 server.listen(3000);
