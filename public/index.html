@@ -9,13 +9,18 @@
 				font-style: italic;
 				opacity: 0.5;
 			}
+			.ui.segment.content {
+				margin-left: auto;
+				margin-right: auto;
+				max-width: 800px;
+			}
 		</style>
 	</head>
 	<body ng-app="chat" ng-controller="Chat">
 		<div class="ui segment">
 			<h1 class="ui header">TheConnMan - Chat</h1>
 		</div>
-		<div class="ui center aligned segment" ng-show="!init">
+		<div class="ui compact segment" style="margin-left: auto; margin-right: auto;" ng-show="!init">
 			<div class="ui right action labeled input">
 				<div class="ui label">
 					Username
@@ -27,8 +32,8 @@
 				</button>
 			</div>
 		</div>
-		<div class="ui segment" ng-show="init">
-			<h2 class="ui header">Messages</h2>
+		<div class="ui segment content" ng-show="init">
+			<h2 class="ui dividing header">Messages</h2>
 			<div class="ui large feed">
 				<div class="event" ng-repeat="message in messages">
 					<div class="content minimal" ng-if="message.type == 'join'">
@@ -50,6 +55,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="ui segment content" ng-show="init">
 			<div class="ui right action fluid input">
 				<input id="message" type="text" ng-model="message" placeholder="Message" enter="sendMessage()" />
 				<button class="ui primary right labeled icon button" ng-click="sendMessage()">
