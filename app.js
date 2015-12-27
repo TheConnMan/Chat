@@ -18,6 +18,15 @@ io.on('connection', function(socket) {
 			type: 'join'
 		});
 	});
+	socket.on('disconnect', function() {
+		if (socket.username) {
+			io.sockets.emit('send:message', {
+				text: socket.username + ' left',
+				date: moment().format('HH:mm ss'),
+				type: 'join'
+			});
+		}
+	});
 });
 
 app.use(express.static('public'));
