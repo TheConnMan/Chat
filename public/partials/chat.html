@@ -1,5 +1,7 @@
 <div class="ui segment content">
-	<h2 class="ui dividing header">Messages - {{ room }}</h2>
+	<h2 class="ui floated left header">Messages - {{ room }}</h2>
+	<div ng-include="'/includes/username.html'"></div>
+	<div class="ui divider" style="clear: both;"></div>
 	<div class="ui large feed">
 		<div class="event" ng-repeat="message in messages">
 			<div class="content minimal" ng-if="message.type == 'join'">

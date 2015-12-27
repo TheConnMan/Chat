@@ -1,11 +1,6 @@
 <div class="ui content segment">
 	<h1 class="ui left floated header">Rooms</h1>
-	<a href="/#/username" class="ui primary left labeled button" style="float: right;">
-		<div class="ui basic label">{{ user.username }}</div>
-		<div class="ui icon button">
-			<i class="pencil icon"></i>
-		</div>
-	</a>
+	<div ng-include="'/includes/username.html'"></div>
 	<div class="ui divider" style="clear: both;"></div>
 	<p>
 		You can join any room you want to join the conversation. Below are a few default rooms.
