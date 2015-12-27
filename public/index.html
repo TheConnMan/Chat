@@ -21,6 +21,21 @@
 				</button>
 			</div>
 		</div>
+		<div class="ui segment" ng-show="init">
+			<h2 class="ui header">Messages</h2>
+			<div class="ui feed">
+				<div class="event" ng-repeat="message in messages">
+					<div class="content" ng-if="message.type == 'join'">
+						<div class="summary">
+							{{ message.text }}
+							<div class="date">
+								{{ message.date }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="/bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="/bower_components/semantic/dist/semantic.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>

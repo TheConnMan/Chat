@@ -3,6 +3,11 @@ factory('socket', function(socketFactory) {
 	return socketFactory();
 }).controller('Chat', ['$scope', '$http', 'socket', function($scope, $http, socket) {
 	$scope.username = '';
+	$scope.messages = [];
+
+	socket.on('send:message', function(message) {
+		$scope.messages.push(message);
+	});
 
 	$scope.sendUsername = function() {
 		if ($scope.username.length !== 0) {
