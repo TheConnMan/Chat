@@ -31,6 +31,8 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 			$location.path('/username');
 		} else if ($routeParams.room) {
 			$scope.changeRoom($routeParams.room);
+		} else {
+			$scope.leaveRoom();
 		}
 	});
 
@@ -68,6 +70,10 @@ angular.module('chat', ['ngRoute', 'btford.socket-io'])
 		$scope.messages = [];
 		$scope.room = room;
 		socket.emit('change', room);
+	};
+
+	$scope.leaveRoom = function() {
+		socket.emit('leave', {});
 	};
 
 	$scope.differentUser = function(index) {

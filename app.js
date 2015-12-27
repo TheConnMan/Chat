@@ -17,6 +17,11 @@ io.on('connection', function(socket) {
 		}
 		rooms.join(io, socket, room);
 	});
+	socket.on('leave', function() {
+		if (socket.room) {
+			rooms.leave(io, socket);
+		}
+	});
 	socket.on('disconnect', function() {
 		if (socket.username) {
 			rooms.leave(io, socket);
