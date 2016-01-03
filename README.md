@@ -18,6 +18,13 @@ Then navigate to [http://localhost:3000](http://localhost:3000).
 **Transient** can also be run with Docker with the following commands:
 
 ```bash
-docker build -t theconnman/transient .
 docker run -d -p 80:3000 --name transient theconnman/transient
 ```
+
+or built locally with:
+
+```bash
+docker build -t theconnman/transient .
+```
+
+then run with the same command as above.
