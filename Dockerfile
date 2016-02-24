@@ -1,12 +1,17 @@
-FROM node
+FROM alpine
 
+RUN apk add --no-cache nodejs git
 RUN npm install -g bower
 
-ADD . /usr/src/app
 WORKDIR /usr/src/app
 
+COPY package.json /usr/src/app
 RUN npm install
+
+COPY . /usr/src/app
 RUN bower install --allow-root
+RUN npm remove -g bower
+RUN apk del git
 
 EXPOSE 3000
 
